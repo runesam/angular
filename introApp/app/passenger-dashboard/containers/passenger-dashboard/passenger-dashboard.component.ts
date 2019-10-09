@@ -7,7 +7,12 @@ import { Passenger } from "../../models/passenger.interface";
   template: `
     <div>
       <passenger-count [items]="passengers"></passenger-count>
-      <passenger-detail *ngFor="let passenger of passengers" [detail]="passenger"></passenger-detail>
+      <passenger-detail
+        [detail]="passenger"
+        (edit)="handleEdit($event)"
+        (remove)="handleRemove($event)"
+        *ngFor="let passenger of passengers"
+      ></passenger-detail>
       <ul>
         <li *ngFor="let passenger of passengers; let i = index;">
           <span class="status" [class.checked-in]="passenger.checkedIn"></span>
@@ -64,4 +69,10 @@ export class PassengerDashboardComponent implements OnInit {
       }
     ];
   }
+  handleRemove = (e) => {
+    console.log(e);
+  };
+  handleEdit = (e) => {
+    console.log(e);
+  };
 }
