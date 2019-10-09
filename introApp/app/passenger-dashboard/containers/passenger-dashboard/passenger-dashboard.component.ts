@@ -31,7 +31,7 @@ import { Passenger } from "../../models/passenger.interface";
 })
 export class PassengerDashboardComponent implements OnInit {
   passengers: Passenger[];
-  constructor(){}
+
   ngOnInit() {
     this.passengers = [
       {
@@ -69,10 +69,19 @@ export class PassengerDashboardComponent implements OnInit {
       }
     ];
   }
-  handleRemove = (e) => {
-    console.log(e);
+
+  handleRemove = (item) => {
+    this.passengers = this.passengers.filter((passenger: Passenger) => {
+      return passenger.id !== item.id;
+    });
   };
-  handleEdit = (e) => {
-    console.log(e);
+
+  handleEdit = (item) => {
+    this.passengers = this.passengers.map((passenger: Passenger): Passenger => {
+      if (passenger.id !== item.id) {
+        passenger = item;
+      }
+      return passenger;
+    });
   };
 }
