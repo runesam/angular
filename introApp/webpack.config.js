@@ -1,16 +1,16 @@
-var path = require('path');
-var fs = require('fs');
+const path = require('path');
+const webpack = require('webpack');
+const ts = require('awesome-typescript-loader');
+const chalk = require('chalk');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const jsonServer = require('json-server');
 
-var webpack = require('webpack');
-var server = require('webpack-dev-server');
-var ts = require('awesome-typescript-loader');
-var chalk = require('chalk');
-var ProgressBarPlugin = require('progress-bar-webpack-plugin');
-var jsonServer = require('json-server');
-
-var cwd = process.cwd();
+const cwd = process.cwd();
 
 module.exports = {
+  optimization: {
+    namedModules: true,
+  },
   cache: true,
   context: cwd,
   performance: {
@@ -98,7 +98,6 @@ module.exports = {
       context: './',
       manifest: require(path.resolve(cwd, 'vendor/vendor-manifest.json'))
     }),
-    new webpack.NamedModulesPlugin(),
     new ProgressBarPlugin({
       format: chalk.magenta.bold('build') + ' [' + chalk.green(':bar')+ '] ' + chalk.green.bold(':percent') + ' ' + chalk.yellow.bold(':elapsed seconds') + ' ' + chalk.white(':msg'),
       clear: false
