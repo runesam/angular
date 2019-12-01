@@ -1,16 +1,13 @@
 const path = require('path');
-const webpack = require('webpack');
-const ts = require('awesome-typescript-loader');
 const chalk = require('chalk');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const webpack = require('webpack');
 const jsonServer = require('json-server');
+const ts = require('awesome-typescript-loader');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const cwd = process.cwd();
 
 module.exports = {
-  optimization: {
-    namedModules: true,
-  },
   cache: true,
   context: cwd,
   performance: {
@@ -43,11 +40,11 @@ module.exports = {
     ]
   },
   output: {
-    chunkFilename: '[name].chunk.js',
     filename: '[name].js',
-    path: path.resolve(cwd, 'build'),
     publicPath: '/build/',
-    sourceMapFilename: '[name].map'
+    sourceMapFilename: '[name].map',
+    chunkFilename: '[name].chunk.js',
+    path: path.resolve(cwd, 'build'),
   },
   module: {
     rules: [
@@ -99,11 +96,11 @@ module.exports = {
       manifest: require(path.resolve(cwd, 'vendor/vendor-manifest.json'))
     }),
     new ProgressBarPlugin({
-      format: chalk.magenta.bold('build') + ' [' + chalk.green(':bar')+ '] ' + chalk.green.bold(':percent') + ' ' + chalk.yellow.bold(':elapsed seconds') + ' ' + chalk.white(':msg'),
+      format: `${chalk['magenta'].bold('build')} [${chalk['green'](':bar')}] '${chalk['green'].bold(':percent')} ${chalk['yellow'].bold(':elapsed seconds')} ${chalk['white'](':msg')}`,
       clear: false
     }),
-    new ts.TsConfigPathsPlugin(),
     new ts.CheckerPlugin(),
+    new ts.TsConfigPathsPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {

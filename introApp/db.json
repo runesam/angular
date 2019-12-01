@@ -1,1 +1,48 @@
-{}
+{
+  "passengers": [
+    {
+      "id": 1,
+      "fullName": "Stephen",
+      "checkedIn": true,
+      "checkInDate": 1490742000000,
+      "children": null
+    },
+    {
+      "id": 2,
+      "fullName": "James",
+      "checkedIn": true,
+      "checkInDate": 1490742000000,
+      "children": [
+        {
+          "name": "Ted",
+          "age": 5
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "fullName": "Rose",
+      "checkedIn": false,
+      "checkInDate": null
+    },
+    {
+      "id": 4,
+      "fullName": "Louise",
+      "checkedIn": true,
+      "checkInDate": 1488412800000,
+      "children": [
+        {
+          "name": "Cherie",
+          "age": 4
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "fullName": "Tina",
+      "checkedIn": false,
+      "checkInDate": null,
+      "children": null
+    }
+  ]
+}

@@ -4,11 +4,11 @@ import { Passenger } from '../../models/passenger.interface';
 
 @Component({
   selector: 'passenger-count',
-  template: `
+  template: ` 
     <div>
       <h3>Airline Passengers</h3>
       <div>
-        Total checked in: {{ checkedInCount() }}/{{ items.length }}
+        Total checked in: {{ checkedInCount() }}/{{ items?.length }}
       </div>
     </div>
   `,

@@ -50,7 +50,9 @@ export class PassengerDetailComponent implements OnChanges {
   editing: boolean = false;
 
   ngOnChanges(changes) {
-    console.log(changes);
+    if (changes.detail) {
+      this.detail = { ...changes.detail.currentValue }
+    }
   }
 
   onNameChange = (fullName: string) => {

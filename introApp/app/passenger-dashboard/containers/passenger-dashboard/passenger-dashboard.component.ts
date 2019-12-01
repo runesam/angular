@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Passenger } from "../../models/passenger.interface";
 
+import { PassengerDashboardService } from '../../passenger-dashboard.service';
+
 @Component({
   selector: 'passenger-dashboard',
   styleUrls: ['passenger-dashboard.component.scss'],
@@ -13,75 +15,41 @@ import { Passenger } from "../../models/passenger.interface";
         (remove)="handleRemove($event)"
         *ngFor="let passenger of passengers"
       ></passenger-detail>
-      <ul>
-        <li *ngFor="let passenger of passengers; let i = index;">
-          <span class="status" [class.checked-in]="passenger.checkedIn"></span>
-          {{i}}: {{passenger.fullName}}
-          <div class="date">
-            check in date:
-            {{passenger.checkInDate ? (passenger.checkInDate | date: 'MMMM dd, yyyy') : 'Not checked in' }}
-          </div>
-          <div class="children">
-            Children: {{passenger.children?.length || 0}}
-          </div>
-        </li>
-      </ul>
     </div>
   `
 })
 export class PassengerDashboardComponent implements OnInit {
-  passengers: Passenger[];
+  private passengers: Passenger[];
+
+  constructor(private passengerService: PassengerDashboardService) {}
 
   ngOnInit() {
-    this.passengers = [
-      {
-        id: 1,
-        fullName: 'Stephen',
-        checkedIn: true,
-        checkInDate: 1490742000000,
-        children: null,
-      },
-      {
-        id: 2,
-        fullName: 'James',
-        checkedIn: true,
-        checkInDate: 1490742000000,
-        children: [{ name: 'Ted', age: 5 }],
-      },
-      {
-        id: 3,
-        fullName: 'Rose',
-        checkedIn: false,
-        checkInDate: null,
-      },
-      {
-        id: 4,
-        fullName: 'Louise',
-        checkedIn: true,
-        checkInDate: 1488412800000,
-        children: [{ name: 'Cherie', age: 4 }]
-      }, {
-        id: 5,
-        fullName: 'Tina',
-        checkedIn: false,
-        checkInDate: null,
-        children: null,
-      }
-    ];
+    this.passengerService
+      .getPassengers()
+      .subscribe((data: Passenger[]) => {
+        this.passengers = data;
+      });
   }
 
-  handleRemove = (item) => {
-    this.passengers = this.passengers.filter((passenger: Passenger) => {
-      return passenger.id !== item.id;
-    });
+  handleRemove = (event: Passenger) => {
+    this.passengerService
+      .deletePassengers(event)
+      .subscribe((data: Passenger) => {
+        this.passengers = this.passengers.filter((passenger: Passenger) => {
+          return passenger.id !== data.id;
+        });
+      });
   };
 
-  handleEdit = (item) => {
-    this.passengers = this.passengers.map((passenger: Passenger): Passenger => {
-      if (passenger.id !== item.id) {
-        passenger = item;
-      }
-      return passenger;
-    });
+  handleEdit = (event: Passenger) => {
+    this.passengerService.updatePassengers(event)
+      .subscribe((data: Passenger) => {
+        this.passengers = this.passengers.map((passenger: Passenger): Passenger => {
+          if (passenger.id === event.id) {
+            passenger = data;
+          }
+          return passenger;
+        });
+      });
   };
 }
