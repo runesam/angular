@@ -1,11 +1,11 @@
 {
   "passengers": [
     {
-      "id": 1,
       "fullName": "Stephen",
+      "id": 1,
       "checkedIn": true,
-      "checkInDate": 1490742000000,
-      "baggage":""
+      "baggage": "hold-only",
+      "checkInDate": 1490742000000
     },
     {
       "id": 2,

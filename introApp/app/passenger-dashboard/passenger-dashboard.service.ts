@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-// import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/throw';
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -23,7 +23,7 @@ export class PassengerDashboardService {
       .catch((error: any) => Observable.throw(error.json()));
   };
 
-  updatePassengers = (passenger: Passenger): Observable<Passenger> => {
+  updatePassenger = (passenger: Passenger): Observable<Passenger> => {
     return this.http
       .put(`${this.passengerApi}/${passenger.id}`, passenger)
       .map((response: Response) => response.json())
