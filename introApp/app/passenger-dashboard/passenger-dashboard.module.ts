@@ -1,11 +1,14 @@
-import { NgModule } from "@angular/core";
-import { HttpModule } from "@angular/http";
-import { CommonModule } from "@angular/common";
+import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import { CommonModule } from '@angular/common';
 
+import { PassengerViewerComponent } from './containers/passenger-viewer/passenger-viewer.component';
 import { PassengerDashboardComponent } from "./containers/passenger-dashboard/passenger-dashboard.component";
+
 import {
-  PassengerDetailComponent,
+  PassengerFormComponent,
   PassengerCountComponent,
+  PassengerDetailComponent,
 } from './components';
 
 import { PassengerDashboardService } from './passenger-dashboard.service';
@@ -13,13 +16,17 @@ import { PassengerDashboardService } from './passenger-dashboard.service';
 @NgModule({
   imports: [CommonModule, HttpModule],
   exports: [
+    PassengerFormComponent,
     PassengerCountComponent,
     PassengerDetailComponent,
+    PassengerViewerComponent,
     PassengerDashboardComponent,
   ],
   declarations: [
+    PassengerFormComponent,
     PassengerCountComponent,
     PassengerDetailComponent,
+    PassengerViewerComponent,
     PassengerDashboardComponent,
   ],
   providers: [PassengerDashboardService],

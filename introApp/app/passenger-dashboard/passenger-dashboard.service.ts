@@ -36,4 +36,11 @@ export class PassengerDashboardService {
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json()));
   };
+
+  getPassenger = (id: number): Observable<Passenger> => {
+    return this.http
+      .get(`${this.passengerApi}/${id}`)
+      .map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json()));
+  };
 }
